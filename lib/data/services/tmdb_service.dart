@@ -10,7 +10,7 @@ import 'api_client.dart';
 /// a short in-memory cache to absorb Render cold-start latency.
 class TmdbService {
   const TmdbService._();
-  static const TmdbService instance = TmdbService._();
+  static final TmdbService instance = TmdbService._();
 
   final _api = ApiClient.instance;
 

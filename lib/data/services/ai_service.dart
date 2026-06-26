@@ -9,7 +9,7 @@ import 'api_client.dart';
 /// of [AiRecommendation], each enriched with TMDB poster/rating data.
 class AiService {
   const AiService._();
-  static const AiService instance = AiService._();
+  static final AiService instance = AiService._();
 
   final _api = ApiClient.instance;
 

@@ -33,7 +33,7 @@ dependencies:
   # ── Utilities ──
   palette_generator: ^0.3.3+4  # dynamic color extraction from posters
   url_launcher: ^6.3.1
-  share_plus: 13.1.0
+  share_plus: ^10.0.0
   path_provider: ^2.1.4
   collection: ^1.18.0
 

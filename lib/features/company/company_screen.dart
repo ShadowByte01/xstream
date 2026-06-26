@@ -181,9 +181,9 @@ class _CompanyScreenState extends ConsumerState<CompanyScreen> {
               ),
             )
           else
-            const SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: Padding(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 child: Text('No movies found for this studio.',
                     style: AppTextStyles.body),
               ),

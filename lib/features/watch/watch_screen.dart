@@ -14,6 +14,7 @@ import '../../shared/widgets/loading_overlay.dart';
 import '../../shared/widgets/most_viewed_badge.dart';
 import '../../shared/widgets/movie_card.dart';
 import '../../shared/widgets/rating_badge.dart';
+import '../../data/services/storage_service.dart';
 
 /// The full-screen streaming player.
 ///
@@ -121,7 +122,7 @@ class _WatchScreenState extends ConsumerState<WatchScreen> {
   @override
   Widget build(BuildContext context) {
     if (_loading) {
-      return const Scaffold(
+      return Scaffold(
         backgroundColor: AppColors.background,
         body: LoadingOverlay(message: 'Connecting to secure servers…'),
       );
@@ -396,10 +397,10 @@ class _PlayerAreaState extends State<_PlayerArea> {
                 children: [
                   WebViewWidget(controller: _controller),
                   if (!_inited)
-                    const Center(
+                    Center(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
-                        children: [
+                        children: const [
                           CircularProgressIndicator(color: AppColors.accent),
                           SizedBox(height: 12),
                           Text('Initializing stream…',
@@ -626,8 +627,8 @@ class _EpisodeSelector extends StatelessWidget {
             ),
           )
         else
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             child: Text('Episode data not available for this season.',
                 style: AppTextStyles.body),
           ),

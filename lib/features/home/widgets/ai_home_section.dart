@@ -120,7 +120,7 @@ class AiHomeSection extends ConsumerWidget {
   void _openAi(BuildContext context, WidgetRef ref) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (_) => const AiRecommendScreen(),
+        builder: (_) => AiRecommendScreen(),
         fullscreenDialog: true,
       ),
     );

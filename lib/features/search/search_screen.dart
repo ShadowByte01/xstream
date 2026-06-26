@@ -292,7 +292,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
             Text('No results for "$_query"',
                 style: AppTextStyles.h3, textAlign: TextAlign.center),
             const SizedBox(height: 6),
-            const Text('Try a different search term',
+            Text('Try a different search term',
                 style: AppTextStyles.body),
           ],
         ),
