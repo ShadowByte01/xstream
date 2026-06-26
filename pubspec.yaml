@@ -1,7 +1,7 @@
 name: xstream
 description: "Xstream — A premium, privacy-first cinematic streaming experience for Android. Movies, Series, Anime and AI-powered recommendations."
 publish_to: "none"
-version: 1.0.2+3
+version: 1.0.3+4
 
 environment:
   sdk: ">=3.3.0 <4.0.0"

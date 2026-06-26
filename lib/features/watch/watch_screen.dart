@@ -355,6 +355,15 @@ class _PlayerArea extends StatefulWidget {
 class _PlayerAreaState extends State<_PlayerArea> {
   late final WebViewController _controller;
   bool _inited = false;
+  bool _showCloseAd = false;
+
+  void _updateBackState() async {
+    if (!mounted) return;
+    final canGoBack = await _controller.canGoBack();
+    if (mounted && canGoBack != _showCloseAd) {
+      setState(() => _showCloseAd = canGoBack);
+    }
+  }
 
   @override
   void initState() {
@@ -362,13 +371,35 @@ class _PlayerAreaState extends State<_PlayerArea> {
     _controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setNavigationDelegate(NavigationDelegate(
-        onPageFinished: (_) {
+        onPageFinished: (_) async {
           if (!_inited) {
             setState(() => _inited = true);
             widget.onLoaded();
           }
+          // Neutralize aggressive popups
+          try {
+            await _controller.runJavaScript('''
+              window.open = function() { return null; };
+              document.onclick = null;
+              window.onclick = null;
+              document.body.onclick = null;
+            ''');
+          } catch (_) {}
+          _updateBackState();
         },
-        onNavigationRequest: (req) => NavigationDecision.navigate,
+        onUrlChange: (UrlChange change) {
+          _updateBackState();
+        },
+        onNavigationRequest: (req) {
+          final url = req.url.toLowerCase();
+          
+          // Aggressive Ad Blocking
+          final adKeywords = ['bet', 'casino', 'ads', 'pop', 'track', 'affiliate', 'redirect', 'onclick', 'slot'];
+          if (url.startsWith('intent://') || url.startsWith('market://') || adKeywords.any((b) => url.contains(b))) {
+            return NavigationDecision.prevent;
+          }
+          return NavigationDecision.navigate;
+        },
       ))
       ..setBackgroundColor(Colors.black)
       ..loadRequest(Uri.parse(widget.streamUrl));
@@ -378,7 +409,10 @@ class _PlayerAreaState extends State<_PlayerArea> {
   void didUpdateWidget(covariant _PlayerArea oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.streamUrl != widget.streamUrl) {
-      setState(() => _inited = false);
+      setState(() {
+        _inited = false;
+        _showCloseAd = false;
+      });
       _controller.loadRequest(Uri.parse(widget.streamUrl));
     }
   }
@@ -396,6 +430,25 @@ class _PlayerAreaState extends State<_PlayerArea> {
               child: Stack(
                 children: [
                   WebViewWidget(controller: _controller),
+                  if (_showCloseAd)
+                    Positioned(
+                      top: 10,
+                      left: 10,
+                      child: ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.redAccent.withOpacity(0.9),
+                          foregroundColor: Colors.white,
+                        ),
+                        icon: const Icon(Icons.arrow_back),
+                        label: const Text('Close Ad & Return'),
+                        onPressed: () async {
+                          if (await _controller.canGoBack()) {
+                            await _controller.goBack();
+                          }
+                          _updateBackState();
+                        },
+                      ),
+                    ),
                   if (!_inited)
                     Center(
                       child: Column(
