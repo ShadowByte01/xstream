@@ -400,9 +400,9 @@ class _PlayerAreaState extends State<_PlayerArea> {
                     Center(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
-                        children: const [
-                          CircularProgressIndicator(color: AppColors.accent),
-                          SizedBox(height: 12),
+                        children: [
+                          const CircularProgressIndicator(color: AppColors.accent),
+                          const SizedBox(height: 12),
                           Text('Initializing stream…',
                               style: AppTextStyles.body),
                         ],

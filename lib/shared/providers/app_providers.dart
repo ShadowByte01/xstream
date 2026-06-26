@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/constants/streaming_servers.dart';
 import '../../core/theme/app_colors.dart';
@@ -9,18 +9,17 @@ import '../../data/services/storage_service.dart';
 
 /// Root provider for the [StorageService] singleton.
 final storageServiceProvider = Provider<StorageService>((ref) {
-  final s = StorageService.I;
-  ref.onDispose(s.removeListener);
-  return s;
+  return StorageService.I;
 });
 
+int _storageVersion = 0;
 /// Re-builds whenever any storage key changes.
-final _storageVersionProvider = StateProvider<int>((ref) {
+final _storageVersionProvider = Provider<int>((ref) {
   final storage = ref.watch(storageServiceProvider);
-  storage.addListener(() {
-    Future.microtask(() => ref.state++);
-  });
-  return 0;
+  void listener() => ref.invalidateSelf();
+  storage.addListener(listener);
+  ref.onDispose(() => storage.removeListener(listener));
+  return _storageVersion++;
 });
 
 // ── Consent ──

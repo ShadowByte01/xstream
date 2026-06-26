@@ -118,8 +118,8 @@ ThemeData buildAppTheme() {
 /// Configures the system UI (status bar + nav bar) to be transparent
 /// over the black background with light icons.
 void configureSystemUi() {
-  SystemChrome.setSystemUiOverlayStyle(
-    const SystemUiOverlayStyle(
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.light,
       statusBarBrightness: Brightness.dark,

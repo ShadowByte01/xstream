@@ -5,7 +5,7 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../data/models/ai_recommendation.dart';
 import '../../../shared/providers/app_providers.dart';
-import '../ai_recommend/ai_recommend_screen.dart';
+import '../../ai_recommend/ai_recommend_screen.dart';
 
 /// The inline "Can't decide what to watch?" banner on the Home page.
 ///

@@ -39,8 +39,8 @@ class XstreamApp extends ConsumerWidget {
       routerConfig: router,
       builder: (context, child) {
         // Keep the system UI bars in sync across pushes/pops.
-        SystemChrome.setSystemUiOverlayStyle(
-          const SystemUiOverlayStyle(
+        SystemChrome.setSystemUIOverlayStyle(
+          SystemUiOverlayStyle(
             statusBarColor: Colors.transparent,
             statusBarIconBrightness: Brightness.light,
             systemNavigationBarColor: AppColors.background,

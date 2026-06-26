@@ -45,11 +45,11 @@ class _AnimeScreenState extends ConsumerState<AnimeScreen> {
       ]);
       if (!mounted) return;
       setState(() {
-        _genres = results[0]
+        _genres = (results[0] as List<Genre>)
             .where((g) => _animeGenres.contains(g.id))
             .map((g) => (id: g.id, name: g.name))
             .toList();
-        _anime = results[1];
+        _anime = results[1] as List<MediaItem>;
         _loading = false;
       });
     } catch (_) {
