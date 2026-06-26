@@ -1,0 +1,63 @@
+name: xstream
+description: "Xstream — A premium, privacy-first cinematic streaming experience for Android. Movies, Series, Anime and AI-powered recommendations."
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # ── State management ──
+  flutter_riverpod: ^2.5.1
+  riverpod_annotation: ^2.3.5
+
+  # ── Networking ──
+  dio: ^5.5.0+1
+
+  # ── Routing ──
+  go_router: ^14.2.0
+
+  # ── Local storage ──
+  shared_preferences: ^2.3.0
+
+  # ── Images & caching ──
+  cached_network_image: ^3.4.1
+  google_fonts: ^6.2.1
+
+  # ── Video / streaming (iframe embeds via WebView) ──
+  webview_flutter: ^4.8.0
+
+  # ── Utilities ──
+  palette_generator: ^0.3.3+4  # dynamic color extraction from posters
+  url_launcher: ^6.3.1
+  share_plus: 13.1.0
+  path_provider: ^2.1.4
+  collection: ^1.18.0
+
+  # ── Icons ──
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+  android: true
+  ios: false
+  image_path: "assets/images/app_icon.png"
+  min_sdk_android: 21
+  adaptive_icon_background: "#050505"
+  adaptive_icon_foreground: "assets/images/app_icon.png"
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/logo.png
+    - assets/images/poster.jpg
+    - assets/images/app_icon.png

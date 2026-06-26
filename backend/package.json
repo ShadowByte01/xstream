@@ -1,0 +1,27 @@
+{
+  "name": "xstream-api",
+  "version": "1.0.0",
+  "description": "Backend proxy for the Xstream Flutter app. Hides TMDB + Groq API keys, applies caching, and enriches AI recommendations with TMDB metadata.",
+  "type": "module",
+  "main": "server.js",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  },
+  "keywords": [
+    "tmdb",
+    "groq",
+    "proxy",
+    "render",
+    "xstream"
+  ],
+  "license": "MIT"
+}

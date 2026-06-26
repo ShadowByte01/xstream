@@ -1,0 +1,33 @@
+# Render Blueprint for the Xstream API backend.
+# Docs: https://render.com/docs/blueprint-spec
+#
+# Deploy via either:
+#   1. Dashboard → New → Blueprint → pick this repo + branch, OR
+#   2. `render deploy` from the CLI (after `render blueprint apply`).
+#
+# After the first deploy, set TMDB_API_KEY and GROQ_API_KEY as environment
+# variables in the Render dashboard (the values below are intentionally
+# empty — never commit real keys to git).
+
+services:
+  - type: web
+    name: xstream-api
+    runtime: node
+    plan: free
+    region: oregon
+    branch: main
+    rootDir: xstream/backend
+    # Render auto-detects the start command from package.json, but we set
+    # it explicitly so there's no ambiguity.
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: 18.17.0
+      - key: TMDB_API_KEY
+        sync: false # set manually in the dashboard
+      - key: GROQ_API_KEY
+        sync: false # set manually in the dashboard
+      # PORT is injected by Render automatically.
