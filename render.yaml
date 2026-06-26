@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: xstream-api
+    env: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: TMDB_API_KEY
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
