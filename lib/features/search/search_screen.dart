@@ -225,7 +225,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
             // ── Results ──
             Expanded(
               child: _loading
-                  ? const LoadingOverlay(message: 'Searching…')
+                  ? LoadingOverlay(message: 'Searching…')
                   : _filtered.isEmpty
                       ? _query.isEmpty
                           ? _emptyIdle()

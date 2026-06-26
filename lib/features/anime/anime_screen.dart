@@ -84,7 +84,7 @@ class _AnimeScreenState extends ConsumerState<AnimeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (_loading) return const LoadingOverlay(message: 'Loading anime…');
+    if (_loading) return LoadingOverlay(message: 'Loading anime…');
 
     return Scaffold(
       backgroundColor: AppColors.background,

@@ -45,9 +45,9 @@ class _MoviesScreenState extends ConsumerState<MoviesScreen> {
       ]);
       if (!mounted) return;
       setState(() {
-        _genres = results[0].map((g) => (id: g.id, name: g.name)).toList();
-        _topRated = results[1];
-        _action = results[2];
+        _genres = (results[0] as List<Genre>).map((g) => (id: g.id, name: g.name)).toList();
+        _topRated = results[1] as List<MediaItem>;
+        _action = results[2] as List<MediaItem>;
         _loading = false;
       });
     } catch (_) {
@@ -80,7 +80,7 @@ class _MoviesScreenState extends ConsumerState<MoviesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (_loading) return const LoadingOverlay(message: 'Loading movies…');
+    if (_loading) return LoadingOverlay(message: 'Loading movies…');
 
     return Scaffold(
       backgroundColor: AppColors.background,

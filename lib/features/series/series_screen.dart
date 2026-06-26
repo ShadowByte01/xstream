@@ -44,9 +44,9 @@ class _SeriesScreenState extends ConsumerState<SeriesScreen> {
       ]);
       if (!mounted) return;
       setState(() {
-        _genres = results[0].map((g) => (id: g.id, name: g.name)).toList();
-        _popular = results[1];
-        _topRated = results[2];
+        _genres = (results[0] as List<Genre>).map((g) => (id: g.id, name: g.name)).toList();
+        _popular = results[1] as List<MediaItem>;
+        _topRated = results[2] as List<MediaItem>;
         _loading = false;
       });
     } catch (_) {
@@ -79,7 +79,7 @@ class _SeriesScreenState extends ConsumerState<SeriesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (_loading) return const LoadingOverlay(message: 'Loading series…');
+    if (_loading) return LoadingOverlay(message: 'Loading series…');
 
     return Scaffold(
       backgroundColor: AppColors.background,

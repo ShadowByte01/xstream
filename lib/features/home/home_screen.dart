@@ -75,7 +75,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final watchlist = ref.watch(watchlistProvider);
 
     if (_loading) {
-      return const LoadingOverlay(message: 'Loading cinema…');
+      return LoadingOverlay(message: 'Loading cinema…');
     }
 
     final mvItems = mostViewed

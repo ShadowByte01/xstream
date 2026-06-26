@@ -498,7 +498,7 @@ class _StarRatingState extends State<_StarRating> {
     return Row(
       children: List.generate(5, (i) {
         final v = i + 1;
-        final filled = v <= (_hover || widget.rating);
+        final filled = v <= (_hover > 0 ? _hover : widget.rating);
         return GestureDetector(
           onTap: () => widget.onRate(widget.rating == v ? 0 : v),
           child: MouseRegion(

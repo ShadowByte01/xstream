@@ -57,7 +57,7 @@ class _NewPopularScreenState extends ConsumerState<NewPopularScreen> {
   @override
   Widget build(BuildContext context) {
     if (_loading) {
-      return const LoadingOverlay(message: 'Loading what\'s hot…');
+      return LoadingOverlay(message: 'Loading what\'s hot…');
     }
 
     return Scaffold(
