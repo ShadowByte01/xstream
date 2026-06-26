@@ -185,7 +185,7 @@ Color _hexToColor(String hex) {
 
 /// Re-evaluates a provider after a storage mutation.
 void bumpStorage(WidgetRef ref) {
-  ref.read(_storageVersionProvider.notifier).state++;
+  ref.invalidate(_storageVersionProvider);
 }
 
 @visibleForTesting

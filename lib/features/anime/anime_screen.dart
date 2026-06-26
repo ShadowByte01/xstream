@@ -111,7 +111,7 @@ class _AnimeScreenState extends ConsumerState<AnimeScreen> {
               )
             else if (_genreLoading)
               const SliverFillRemaining(
-                child: LoadingOverlay(message: 'Filtering…'),
+                child: const LoadingOverlay(message: 'Filtering…'),
               )
             else
               SliverPadding(

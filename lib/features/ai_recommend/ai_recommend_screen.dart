@@ -215,12 +215,12 @@ class _InputStage extends StatelessWidget {
             maxLines: 4,
             maxLength: 300,
             style: AppTextStyles.bodyPrimary,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               hintText:
                   'e.g. I want a movie about time travel with a twist ending…',
               hintStyle: AppTextStyles.body,
               border: InputBorder.none,
-              contentPadding: EdgeInsets.all(14),
+              contentPadding: const EdgeInsets.all(14),
             ),
           ),
         ),

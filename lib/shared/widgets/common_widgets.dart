@@ -70,7 +70,7 @@ class GenrePills extends StatelessWidget {
 
 /// A centered circular loading indicator with an optional message.
 class LoadingOverlay extends StatelessWidget {
-  LoadingOverlay({super.key, this.message, this.size = 40});
+  const LoadingOverlay({super.key, this.message, this.size = 40});
   final String? message;
   final double size;
 
