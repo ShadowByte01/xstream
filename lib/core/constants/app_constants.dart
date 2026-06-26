@@ -16,7 +16,7 @@ class AppConstants {
   /// The backend proxies TMDB + Groq so API keys never ship inside the APK.
   static const String backendBaseUrl = String.fromEnvironment(
     'BACKEND_URL',
-    defaultValue: 'https://xstream-api.onrender.com',
+    defaultValue: 'https://xstream-mrjx.onrender.com',
   );
 
   /// TMDB image CDN base.
