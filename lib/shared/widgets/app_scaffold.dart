@@ -31,12 +31,20 @@ class AppScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // The bottom nav is a floating pill drawn on top of the body
+    // (extendBody: true). To stop the last row of content / buttons from
+    // hiding behind it, we reserve space at the bottom of the body equal to
+    // the nav height + its margin + the device's bottom safe area.
+    final bottomInset = MediaQuery.viewPaddingOf(context).bottom + 84;
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
         top: true,
         bottom: false,
-        child: child,
+        child: Padding(
+          padding: EdgeInsets.only(bottom: bottomInset),
+          child: child,
+        ),
       ),
       extendBody: true,
       bottomNavigationBar: const _BottomNav(),

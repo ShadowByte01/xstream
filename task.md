@@ -1,0 +1,5 @@
+- `[x]` Implement Ad Block features in `lib/features/watch/watch_screen.dart`
+  - `[x]` Intercept navigation requests to block ad URLs
+  - `[x]` Inject JavaScript to disable `window.open`
+  - `[x]` Add "Close Ad" overlay button when `canGoBack()` is true
+- `[x]` Commit and build the updated APK

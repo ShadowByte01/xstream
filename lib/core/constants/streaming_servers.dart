@@ -13,12 +13,14 @@ class StreamingServer {
     required this.name,
     required this.flag,
     required this.backend,
+    this.adMode = AdMode.standard,
   });
 
   final String id;
   final String name;
   final ServerFlag flag;
   final StreamingBackend backend;
+  final AdMode adMode;
 
   /// Builds the embed URL for a movie.
   String movieUrl(String id) => backend.movieUrl(id);
@@ -26,10 +28,16 @@ class StreamingServer {
   /// Builds the embed URL for a TV episode.
   String tvUrl(String id, int season, int episode) =>
       backend.tvUrl(id, season, episode);
+
+  /// True when this server is advertised as ad-free.
+  bool get isAdFree => adMode == AdMode.adFree;
 }
 
 /// Visual marker shown next to a server in the picker.
-enum ServerFlag { zap, star, us, india, uk, australia }
+enum ServerFlag { zap, star, us, india, uk, australia, shield }
+
+/// Whether a server is marketed as ad-free.
+enum AdMode { standard, adFree }
 
 /// A genuinely distinct embed provider.
 class StreamingBackend {
@@ -44,7 +52,7 @@ class StreamingBackend {
   final String checkUrl;
 }
 
-// ── 6 distinct embed providers ──
+// ── 7 distinct embed providers ──
 final List<StreamingBackend> _backends = [
   StreamingBackend(
     movieUrl: (id) => 'https://vidlink.pro/movie/$id',
@@ -78,9 +86,16 @@ final List<StreamingBackend> _backends = [
     tvUrl: (id, s, e) => 'https://peachify.top/embed/tv/$id/$s/$e',
     checkUrl: 'https://peachify.top',
   ),
+  // ── VidFast — ad-free embed provider (no ads, no popups) ──
+  StreamingBackend(
+    movieUrl: (id) => 'https://vidfast.pro/movie/$id',
+    tvUrl: (id, s, e) => 'https://vidfast.pro/tv/$id/$s/$e',
+    checkUrl: 'https://vidfast.pro',
+  ),
 ];
 
-/// The 11 branded server options the user sees (same names/flags as web).
+/// The branded server options the user sees (same names/flags as web),
+/// plus VidFast as the ad-free option.
 final List<StreamingServer> streamingServers = [
   StreamingServer(id: 'server-0', name: 'Peachify', flag: ServerFlag.zap, backend: _backends[5]),
   StreamingServer(id: 'server-1', name: 'Xstream', flag: ServerFlag.zap, backend: _backends[0]),
@@ -93,7 +108,20 @@ final List<StreamingServer> streamingServers = [
   StreamingServer(id: 'server-8', name: '4K', flag: ServerFlag.uk, backend: _backends[2]),
   StreamingServer(id: 'server-9', name: 'Premium', flag: ServerFlag.us, backend: _backends[3]),
   StreamingServer(id: 'server-10', name: 'MultiEmbed', flag: ServerFlag.australia, backend: _backends[4]),
+  // ── Ad-free server (VidFast — no ads, no popups) ──
+  StreamingServer(
+    id: 'server-vidfast',
+    name: 'VidFast',
+    flag: ServerFlag.shield,
+    backend: _backends[6],
+    adMode: AdMode.adFree,
+  ),
 ];
 
 /// Default server (Peachify — index 0, matching the web app).
 final StreamingServer defaultServer = streamingServers.first;
+
+/// The ad-free server. The "Ad-Free" button switches to this one
+/// automatically because VidFast does not serve ads.
+final StreamingServer adFreeServer =
+    streamingServers.firstWhere((s) => s.isAdFree, orElse: () => streamingServers.last);

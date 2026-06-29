@@ -7,8 +7,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// The cinematic intro splash shown on first launch.
 ///
-/// Ports the web app's `IntroSplash` — a popping "X" followed by a
-/// light-speed spectrum of colored bars, then a fade to the home page.
+/// Ports the web app's `IntroSplash` — the XStream logo pops in, followed
+/// by a light-speed spectrum of colored bars, then a fade to the home page.
 /// On subsequent launches it skips straight to home (controlled by the
 /// `hasSeenIntro` preference).
 class SplashScreen extends ConsumerStatefulWidget {
@@ -126,7 +126,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                     );
                   },
                 ),
-                // ── Cinematic X ──
+                // ── XStream logo ──
                 Center(
                   child: ScaleTransition(
                     scale: Tween(begin: 0.0, end: 1.0).animate(
@@ -135,44 +135,12 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                         curve: Curves.elasticOut,
                       ),
                     ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          'X',
-                          style: AppTextStyles.display.copyWith(
-                            fontSize: 110,
-                            color: Colors.white,
-                            shadows: [
-                              Shadow(
-                                color: AppColors.accent.withValues(alpha: 0.6),
-                                blurRadius: 40,
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        SlideTransition(
-                          position: Tween<Offset>(
-                            begin: const Offset(0, 0.5),
-                            end: Offset.zero,
-                          ).animate(CurvedAnimation(
-                            parent: _xScale,
-                            curve: Curves.easeOut,
-                          )),
-                          child: FadeTransition(
-                            opacity: _xScale,
-                            child: Text(
-                              'XSTREAM',
-                              style: AppTextStyles.label.copyWith(
-                                fontSize: 16,
-                                letterSpacing: 8,
-                                color: AppColors.textSecondary,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                    child: Image.asset(
+                      'assets/images/logo.png',
+                      width: 200,
+                      height: 200,
+                      fit: BoxFit.contain,
+                      filterQuality: FilterQuality.high,
                     ),
                   ),
                 ),
